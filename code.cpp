@@ -61,7 +61,7 @@ int main()
                     std::cout << "mouse x: " << event.mouseButton.x << std::endl;
                     std::cout << "mouse y: " << event.mouseButton.y << std::endl;
 
-                    if(vertices.size() < 3)
+                    if(vertices.size() < 4)
                     {
                         vertices.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
 						displayvertices = "Vertex " + to_string(vertices.size()) + "\nmouse x: " + to_string(event.mouseButton.x) + "\nmouse y: " + to_string(event.mouseButton.y) +"\n";
@@ -93,9 +93,17 @@ int main()
             ///select random vertex
             ///calculate midpoint between random vertex and the last point in the vector
             ///push back the newly generated coord.
-	    	for (int i=0; i<50; i++)
+	    	
+			int checker = 5;
+			for (int i=0; i<50; i++)
 			{
 				int index=rand() % vertices.size();
+				
+				while (index == checker) 
+				{
+				index=rand() % vertices.size();
+				}
+				checker = index;
 				Vector2f randVertex = vertices[index];
 
 				Vector2f midpoint = (randVertex + points.back())/2.0f;
@@ -133,7 +141,7 @@ int main()
     	text.setCharacterSize(25);
     	text.setFillColor(Color::White);
     	text.setPosition(10.f, 10.f);
-    	text.setString("Click on 3 spots to set up triangle vertices. \nThen click for the 4th point to start generating the fractal. ");
+    	text.setString("Click on 4 spots to set up Quadralateral/Square vertices. \nThen click for the 5th point to start generating the fractal. ");
 		
 	window.draw(text);
 	window.draw(displayCoords);
